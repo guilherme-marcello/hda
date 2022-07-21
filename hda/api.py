@@ -177,13 +177,13 @@ class SearchResults:
                                                                bytes_to_string(self.volume),
                                                                self.jobId,)
 
-    def download(self):
+    def download(self, dest_dir=""):
         for result in self.results:
             query = {"jobId": self.jobId,
                      "uri": result['url']}
             self.debug(result)
             url = DataOrderRequest(self.client).run(query)
-            self.stream(result.get('filename'), result.get('size'), *url)
+            self.stream(dest_dir + result.get('filename'), result.get('size'), *url)
 
 
 class Client(object):
